@@ -78,6 +78,8 @@ option(BUILD_PYTHON_MODULE "Build python-module? " ON) # building the python-mod
 # command-line for a build without boost-python:
 # cmake -DBUILD_PYTHON_MODULE=OFF ../src
 
+option(USE_PY_3 "Use Python V3" OFF)
+
 option(BUILD_DOC "Build doxygen documentation? " ON)
 
 option(BUILD_CPP_TESTS "Build c++ tests?" ON) 
@@ -112,29 +114,36 @@ endif (CMAKE_BUILD_TYPE MATCHES "Coverage")
 # header file search path
 MESSAGE(STATUS "Your system is: ${CMAKE_SYSTEM_NAME}")
 IF( ${BUILD_PYTHON_MODULE} MATCHES ON)
-  find_package (PythonLibs 2.7 EXACT REQUIRED) 
+  IF (USE_PY_3)
+    find_package (Python3 COMPONENTS Interpreter Development) 
+    set(PYTHON_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
+    set(PYTHON_LIBRARIES ${Python3_LIBRARIES})
+    set(PYTHON_SITE_PACKAGES ${Python3_SITELIB})
+    set(PYTHON_ARCH_PACKAGES ${Python3_SITEARCH})
+    set(PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
+    find_package(Boost COMPONENTS python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR})
+  ELSE()
+    find_package (Python2 COMPONENTS Interpreter Development) 
+    set(PYTHON_INCLUDE_DIRS ${Python2_INCLUDE_DIRS})
+    set(PYTHON_LIBRARIES ${Python2_LIBRARIES})
+    set(PYTHON_SITE_PACKAGES ${Python2_SITELIB})
+    set(PYTHON_ARCH_PACKAGES ${Python2_SITEARCH})
+    set(PYTHON_EXECUTABLE ${Python2_EXECUTABLE})
+    find_package(Boost COMPONENTS python${Python2_VERSION_MAJOR}${Python2_VERSION_MINOR})
+  ENDIF()
   include_directories(${PYTHON_INCLUDE_DIRS})
   MESSAGE(STATUS "Python includes: " ${PYTHON_INCLUDE_DIRS})
-  find_package (PythonInterp 2.7  EXACT REQUIRED)
+ELSE()
+  find_package( Boost REQUIRED )
 ENDIF()
 
-
-
-find_package( Boost REQUIRED )
 if(Boost_FOUND)
   include_directories(${Boost_INCLUDE_DIRS})
   MESSAGE(STATUS "Boost_LIB_VERSION: " ${Boost_LIB_VERSION})
   MESSAGE(STATUS "Boost_INCLUDE_DIRS are: " ${Boost_INCLUDE_DIRS})
   MESSAGE(STATUS "boost_LIBRARY_DIRS is: " ${Boost_LIBRARY_DIRS})
   MESSAGE(STATUS "Boost_LIBRARIES is: " ${Boost_LIBRARIES})
-  
 endif()
-
-# find boost-python
-IF( ${BUILD_PYTHON_MODULE} MATCHES ON)
-  find_package( Boost COMPONENTS python REQUIRED)
-  MESSAGE(STATUS "Boost_PYTHON_LIBRARY is: " ${Boost_PYTHON_LIBRARY})
-ENDIF()
 
 # find the qd library
 set( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR} ) # Findqd.cmake is in this dir
