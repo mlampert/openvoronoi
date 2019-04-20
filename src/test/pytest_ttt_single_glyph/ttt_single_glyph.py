@@ -46,17 +46,17 @@ def insert_polygon_points(vd, polygon):
     for p in polygon:
         pts.append( ovd.Point( p[0], p[1] ) )
     id_list = []
-    print "inserting ",len(pts)," point-sites:"
+    print("inserting ",len(pts)," point-sites:")
     m=0
     for p in pts:
         id_list.append( vd.addVertexSite( p ) )
-        #print " ",m," added vertex ", id_list[ len(id_list) -1 ]
+        #print(" ",m," added vertex ", id_list[ len(id_list) -1 ])
         m=m+1   
-    #print vd.numFaces()," faces after all points inserted"
+    #print(vd.numFaces()," faces after all points inserted")
     return id_list
 
 def insert_polygon_segments(vd,id_list):
-    print "inserting ",len(id_list)," line-segments:"
+    print("inserting ",len(id_list)," line-segments:")
     for n in range(len(id_list)):
         n_nxt = n+1
         if n==(len(id_list)-1):
@@ -123,7 +123,7 @@ if __name__ == "__main__":
 
     alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     char = alphabet[n]
-    print "ttt_single_glyph.py: inserting glyph ", char
+    print("ttt_single_glyph.py: inserting glyph ", char)
 
     scale = 3000
     #segs = ttt_segments(  char, scale)
@@ -142,10 +142,10 @@ if __name__ == "__main__":
     # optional output to svg file
     filename = "svg_test.svg"
     #ovd.vd2svg(filename,vd)
-    #print "wrote to file %s" % filename
+    #print("wrote to file %s" % filename)
     
     c = vd.check()
-    print " VD check: ", c
+    print(" VD check: ", c)
     if c:
         exit(0)
     else:

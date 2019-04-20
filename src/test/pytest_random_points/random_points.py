@@ -24,7 +24,7 @@ if __name__ == "__main__":
     random.seed(s)
     Nmax = n_pts
     
-    print "random_points.py N=",Nmax," seed=",s
+    print("random_points.py N=",Nmax," seed=",s)
     vd = ovd.VoronoiDiagram(1,120)
     
     plist = randomGenerators(1, Nmax)    
@@ -33,14 +33,14 @@ if __name__ == "__main__":
     n=0
     id_list=[]
     for p in plist: 
-        #print n," adding ",p
+        #print(n," adding ",p)
         id_list.append( vd.addVertexSite( p ) )
         n=n+1
     t_after = time.time()
     calctime = t_after-t_before
-    print " VD done in ", calctime," s, ", 1e6*calctime/(float(Nmax)*(math.log(Nmax)/math.log(2.0)))," us per n*log2(n)"
+    print(" VD done in ", calctime," s, ", 1e6*calctime/(float(Nmax)*(math.log(Nmax)/math.log(2.0)))," us per n*log2(n)")
     c = vd.check()
-    print " VD check: ", c
+    print(" VD check: ", c)
     if c:
         exit(0)
     else:
