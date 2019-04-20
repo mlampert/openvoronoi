@@ -115,6 +115,7 @@ IF( ${BUILD_PYTHON_MODULE} MATCHES ON)
   find_package (PythonLibs 2.7 EXACT REQUIRED) 
   include_directories(${PYTHON_INCLUDE_DIRS})
   MESSAGE(STATUS "Python includes: " ${PYTHON_INCLUDE_DIRS})
+  find_package (PythonInterp 2.7  EXACT REQUIRED)
 ENDIF()
 
 
