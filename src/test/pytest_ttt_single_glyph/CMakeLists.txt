@@ -7,5 +7,6 @@ set( ROTS 0 45 90 135 180 225 270 315 )
 foreach( CASE RANGE 25) # characters A..Z
     foreach( ROT ${ROTS} ) # rotation angles
         ADD_TEST(${test_name}_G${CASE}_R${ROT} python ${CMAKE_SOURCE_DIR}/test/${test_name}/ttt_single_glyph.py ${CASE} ${ROT})
+        set_property(TEST ${test_name}_G${CASE}_R${ROT} PROPERTY ENVIRONMENT PYTHONPATH=${CMAKE_BINARY_DIR}:$ENV{PYTHONPATH})
     endforeach()
 endforeach()

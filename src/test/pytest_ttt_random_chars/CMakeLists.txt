@@ -7,4 +7,5 @@ foreach( CASE RANGE 25) # seeds 1..25. These take about 4s each to run.
         NAME ${test_name}_${CASE} 
         #CONFIGURATIONS Nightly
         COMMAND python ${CMAKE_SOURCE_DIR}/test/${test_name}/ttt_random_chars.py ${CASE})
+    set_property(TEST ${test_name}_${CASE} PROPERTY ENVIRONMENT PYTHONPATH=${CMAKE_BINARY_DIR}:$ENV{PYTHONPATH})
 endforeach()
