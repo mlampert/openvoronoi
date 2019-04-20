@@ -180,13 +180,13 @@ if __name__ == "__main__":
 
     import pycam.Importers.DXFImporter as importer
 
-    print "reading from DXF-file: ", sys.argv[1]
+    print("reading from DXF-file: ", sys.argv[1])
     model = importer.import_model(sys.argv[1])
     model.revise_directions()
 
     # draw the input geometry
     point_set, line_set = _polygons_to_line_set(model.get_polygons())
-    # print("point_set[0]:%s" % point_set[0])
+    # print("point_set[0]:%s" % point_set[0]))
     offset2vtk.drawLinesegs(myscreen, point_set, line_set)
 
     first_offset = 0.03
@@ -198,7 +198,7 @@ if __name__ == "__main__":
 
     offset2vtk.drawOffsets2(myscreen, offset_loops)
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

@@ -24,7 +24,7 @@ def writeFrame(w2if, lwr, n):
 def regularGridGenerators(far, Nmax):
     # REGULAR GRID
     rows = int(math.sqrt(Nmax))
-    print "rows= ", rows
+    print("rows= ", rows)
     gpos = [-0.7 * far, 1.4 * far / float(rows - 1)]  # start, stride
     plist = []
     for n in range(rows):
@@ -72,7 +72,7 @@ def circleGenerators(far, Nmax):
 
 
 if __name__ == "__main__":
-    # print ocl.revision()
+    # print(ocl.revision())
     myscreen = ovdvtk.VTKScreen(width=1024, height=720)  # (width=1920, height=1080)
     ovdvtk.drawOCLtext(myscreen, rev_text=ovd.version())
 
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -124,13 +124,13 @@ if __name__ == "__main__":
     n = 0
     id_list = []
     for p in plist:
-        print n, " adding ", p
+        print(n, " adding ", p)
         id_list.append(vd.addVertexSite(p))
         n = n + 1
 
     Nsegs = 0
 
-    # print "returned: ",vd.addLineSite(69,105,10)
+    # print("returned: ",vd.addLineSite(69,105,10))
     """
     vd.addLineSite(83,35)
     vd.addLineSite(63,153)
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     # for seg in segs:
     #    id1= seg[0]
     #    id2= seg[1]
-    #    print "add segment ",id1, " to ", id2
+    #    print("add segment ",id1, " to ", id2)
     #    vd.addLineSite( id1, id2 , 20)
     # vd.addLineSite( id3, id4 )
 
@@ -161,12 +161,12 @@ if __name__ == "__main__":
     calctime = t_after - t_before
     if Nmax == 0:
         Nmax = 1
-    print " VD done in ", calctime, " s, ", calctime / Nmax, " s per generator"
+    print(" VD done in ", calctime, " s, ", calctime / Nmax, " s per generator")
 
     vod.setAll()
     myscreen.render()
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

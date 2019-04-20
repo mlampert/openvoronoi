@@ -53,8 +53,8 @@ def loadData(seed):
     pstring = f.read()
     data = pickle.loads(pstring)
     f.close()
-    print " loaded ", len(data), " sum=", sum(data.values())
-    # print data
+    print(" loaded ", len(data), " sum=", sum(data.values()))
+    # print(data)
     return data
 
 
@@ -80,7 +80,7 @@ def loadDatas(slist):
     for s in slist:
         datas.append(loadData(s))
     # merge all datas into one
-    # print datas
+    # print(datas)
     out = dict()
     for d in datas:
         out = mergeData(d, out)
@@ -92,9 +92,9 @@ if __name__ == "__main__":
     # data=loadData(0)
     max_seed = 10
     data = loadDatas(range(max_seed))
-    print " merged ", len(data), " sum=", sum(data.values())
+    print(" merged ", len(data), " sum=", sum(data.values()))
 
-    print data
+    print(data)
 
     data2 = sortedDict(data)
 
@@ -103,13 +103,13 @@ if __name__ == "__main__":
     error = []
     fsum = 0
     for row in data2:
-        # print row[0], " = ", row[1]
+        # print(row[0], " = ", row[1])
         n.append(row[0])
         f.append(row[1])
         fsum = fsum + row[1]
         error.append(math.sqrt(row[1]))
 
-    print "fsum=", fsum
+    print("fsum=", fsum)
     fnorm = []
     enorm_pos = []
     enorm_neg = []
@@ -124,7 +124,7 @@ if __name__ == "__main__":
         else:
             enorm_neg.append(en)
 
-        # print fn, " +/- ", en
+        # print(fn, " +/- ", en)
 
     psum = sum(fnorm)
 
@@ -137,8 +137,8 @@ if __name__ == "__main__":
         sqsum = sqsum + f[m] * n[m]
 
     n_mean = float(wsum) / float(fsum)
-    print "psum= ", psum
-    print "n_mean= ", n_mean
+    print("psum= ", psum)
+    print("n_mean= ", n_mean)
 
     # calculate asymptotic approximation pn0
     dx = 0.1
@@ -150,8 +150,8 @@ if __name__ == "__main__":
         c = math.gamma(2 * nv + 1)
         pn0.append(a * b / c)
 
-    print len(naxis)
-    print len(pn0)
+    print(len(naxis))
+    print(len(pn0))
     # exit()
     P.figure()
 
@@ -184,4 +184,4 @@ if __name__ == "__main__":
 
     P.show()
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")

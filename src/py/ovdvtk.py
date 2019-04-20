@@ -68,7 +68,7 @@ def drawArc(myscreen, pt1, pt2, r, cen, cw, arcColor, da=0.1):
     arclength = r * dtheta
     dlength = min(da, arclength / 10)
     steps = int(float(arclength) / float(dlength))
-    # print "arc subdivision steps: ",steps
+    # print("arc subdivision steps: ",steps)
     rsteps = float(1) / float(steps)
     dc = math.cos(-dtheta * rsteps)  # delta-cos
     ds = math.sin(-dtheta * rsteps)  # delta-sin
@@ -123,7 +123,7 @@ def drawOffsets(myscreen, ofs):
                 # myscreen.addActor( ovdvtk.Line(p1=(previous.x,previous.y,0),p2=(p.x,p.y,0),color=loopColor) )
                 previous = p
             n = n + 1
-        print "rendered loop ", nloop, " with ", len(lop), " points"
+        print("rendered loop ", nloop, " with ", len(lop), " points")
         nloop = nloop + 1
 
 
@@ -222,7 +222,7 @@ class VD:
         self.N_pointgen = self.vd.numPointSites()
         self.N_linegen = self.vd.numLineSites()
         pts = self.N_pointgen
-        # print times
+        # print(times)
         lns = self.N_linegen
         if lns == 0 or lns == 1:
             lns = 2  # avoid dividing by log(1)=0
@@ -308,7 +308,7 @@ class VD:
         self.myscreen.render()
 
     def drawErrorVertices(self):
-        # print "drawVertexIdx ", index
+        # print("drawVertexIdx ", index)
         for pt in self.vd.getVoronoiVertices():
             p = pt[0]  # self.scale*
             vcolor = cyan
@@ -318,7 +318,7 @@ class VD:
             err = pt[5]
             if err > 1e-6:
                 # id_text = str(idx)
-                print "drawErrorVertex ", idx, " pos= ", p, " err=", err
+                print("drawErrorVertex ", idx, " pos= ", p, " err=", err)
                 # factor = FollowerText( text=id_text,center=(p.x,p.y,0), scale = self.textScale, color=vcolor)
                 # self.verts.append(factor)
                 actor = Sphere(center=(p.x, p.y, 0), radius=self.vertexRadius, color=pink)
@@ -328,7 +328,7 @@ class VD:
                 # self.myscreen.addActor( factor )
 
     def drawVertexIdx(self, index):
-        # print "drawVertexIdx ", index
+        # print("drawVertexIdx ", index)
         for pt in self.vd.getVoronoiVertices():
             p = self.scale * pt[0]
             vcolor = cyan
@@ -336,7 +336,7 @@ class VD:
             idx = pt[3]
             if idx == index:
                 id_text = str(idx)
-                # print "drawVertexIdx text= ", id_text, " pos= ", p
+                # print("drawVertexIdx text= ", id_text, " pos= ", p)
                 factor = FollowerText(text=id_text, center=(p.x, p.y, 0), scale=self.textScale, color=vcolor)
                 # self.verts.append(factor)
                 self.myscreen.addActor(factor)
@@ -359,7 +359,7 @@ class VD:
                 if (
                         vtype != ovd.VertexType.SEPPOINT and vtype != ovd.VertexType.ENDPOINT and vtype != ovd.VertexType.POINTSITE):
                     id_text = str(idx)
-                    # print "drawVertexIdx text= ", id_text, " pos= ", p
+                    # print("drawVertexIdx text= ", id_text, " pos= ", p)
                     factor = FollowerText(text=id_text, center=(p.x, p.y, 0), scale=self.textScale, color=vcolor)
                     # self.verts.append(factor)
                     self.myscreen.addActor(factor)
@@ -399,7 +399,7 @@ class VD:
                 line = vtk.vtkLine()
                 line.GetPointIds().SetId(0, seg[0])
                 line.GetPointIds().SetId(1, seg[1])
-                # print " indexes: ", seg[0]," to ",seg[1]
+                # print(" indexes: ", seg[0]," to ",seg[1])
                 self.lineCells.InsertNextCell(line)
         Colors = vtk.vtkUnsignedCharArray()
 
@@ -455,7 +455,7 @@ class VD:
             return default_color
 
     def edgeTypeColor(self, edgeType, src_status, trg_status):
-        # print " edgeStatusColor edgeType= ",edgeType
+        # print(" edgeStatusColor edgeType= ",edgeType)
         if (edgeType == ovd.EdgeType.LINELINE):
             return self.edgeStatusColor(src_status, trg_status, lblue)
         if (edgeType == ovd.EdgeType.PARA_LINELINE):
@@ -477,7 +477,7 @@ class VD:
         if (edgeType == ovd.EdgeType.NULLEDGE):
             return white
         else:
-            print "UNKNOWN edge type = ", edgeType
+            print("UNKNOWN edge type = ", edgeType)
             return white
 
     def setEdges(self):
@@ -490,7 +490,7 @@ class VD:
             src_status = e[2]  # src status
             trg_status = e[3]  # trg status
             ecolor = pink  # self.edgeColor
-            # print "drawing etype=", etype
+            # print("drawing etype=", etype)
             actor = 0
 
             if (etype == ovd.VoronoiEdgeType.LINELINE):
@@ -498,7 +498,7 @@ class VD:
                 for n in range(len(epts) - 1):
                     p1 = self.scale * epts[n]
                     p2 = self.scale * epts[n + 1]
-                    # print "line ",n," : ",p1," to ",p2
+                    # print("line ",n," : ",p1," to ",p2)
                     actor = Line(p1=(p1.x, p1.y, 0), p2=(p2.x, p2.y, 0), color=ecolor)
                     self.myscreen.addActor(actor)
                     self.edges.append(actor)
@@ -601,12 +601,12 @@ def drawTree(myscreen, t, color=red, opacity=0.2, offset=(0, 0, 0)):
         # cube.SetWireframe()
         myscreen.addActor(cube)
         # if (nmax>100):
-        #    print "i=", i
-        #    print "div=", (float(nmax)/10)
+        #    print("i=", i)
+        #    print("div=", (float(nmax)/10))
         #    if ( (i % (float(nmax)/10))==0):
-        #        print ".",
+        #        print(".",)
         # i=i+1
-    # print "done."
+    # print("done.")
 
 
 def drawTree2(myscreen, t, color=red, opacity=0.2):
@@ -927,7 +927,7 @@ class PolyLine(CamvtkActor):
         segs = []
         for p in pointList:
             points.InsertNextPoint(p.x, p.y, 0)
-            # print "p = ",p
+            # print("p = ",p)
             if first == 0:
                 seg = [last_idx, idx]
                 segs.append(seg)
@@ -939,7 +939,7 @@ class PolyLine(CamvtkActor):
             line = vtk.vtkLine()
             line.GetPointIds().SetId(0, seg[0])
             line.GetPointIds().SetId(1, seg[1])
-            # print " indexes: ", seg[0]," to ",seg[1]
+            # print(" indexes: ", seg[0]," to ",seg[1])
             polyline.InsertNextCell(line)
 
         polydata = vtk.vtkPolyData()
@@ -988,7 +988,7 @@ class Circle(CamvtkActor):
         lines = vtk.vtkCellArray()
         id = 0
         points = vtk.vtkPoints()
-        for n in xrange(0, resolution):
+        for n in range(0, resolution):
             line = vtk.vtkLine()
             angle1 = (float(n) / (float(resolution))) * 2 * math.pi
             angle2 = (float(n + 1) / (float(resolution))) * 2 * math.pi

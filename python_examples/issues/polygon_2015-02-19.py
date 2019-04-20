@@ -46,7 +46,7 @@ def drawOffsets(myscreen, ofs):
                 # myscreen.addActor( ovdvtk.Line(p1=(previous.x,previous.y,0),p2=(p.x,p.y,0),color=loopColor) )
                 previous = p
             n = n + 1
-        print "rendered loop ", nloop, " with ", len(lop), " points"
+        print("rendered loop ", nloop, " with ", len(lop), " points")
         nloop = nloop + 1
 
 
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -107,7 +107,7 @@ if __name__ == "__main__":
         pts.append(ovd.Point(p[0], p[1]))
 
     # t_after = time.time()
-    # print ".done in {0:.3f} s.".format( t_after-t_before )
+    # print(".done in {0:.3f} s.".format( t_after-t_before ))
     times = []
     id_list = []
     m = 0
@@ -115,28 +115,28 @@ if __name__ == "__main__":
     for p in pts:
         pt_id = vd.addVertexSite(p)
         id_list.append(pt_id)
-        print m, " added vertex", pt_id, " at ", p
+        print(m, " added vertex", pt_id, " at ", p)
         m = m + 1
 
     t_after = time.time()
     times.append(t_after - t_before)
     # exit()
 
-    # print "   ",2*Nmax," point-sites sites took {0:.3f}".format(times[0])," seconds, {0:.2f}".format( 1e6*float( times[0] )/(float(2*Nmax)*float(math.log10(2*Nmax))) ) ,"us/n*log(n)"
-    print "all point sites inserted. "
-    print "VD check: ", vd.check()
+    # print("   ",2*Nmax," point-sites sites took {0:.3f}".format(times[0])," seconds, {0:.2f}".format( 1e6*float( times[0] )/(float(2*Nmax)*float(math.log10(2*Nmax))) ) ,"us/n*log(n)")
+    print("all point sites inserted. ")
+    print("VD check: ", vd.check())
 
-    print "now adding line-segments."
+    print("now adding line-segments.")
     t_before = time.time()
     for n in [0]:  # range(len(id_list)):
         if n == len(id_list) - 1:
-            print n, " trying ", n, " to ", n + 1
+            print(n, " trying ", n, " to ", n + 1)
             vd.addLineSite(id_list[n], id_list[n + 1])
-            print n, " added segment", n, " to ", n + 1
+            print(n, " added segment", n, " to ", n + 1)
         else:
-            print n, " trying ", n, " to ", n + 1
+            print(n, " trying ", n, " to ", n + 1)
             vd.addLineSite(id_list[n], id_list[0])
-            print n, " added final segment", n, " to ", 0
+            print(n, " added final segment", n, " to ", 0)
 
     # vd.addLineSite( id_list[1], id_list[2])
     # vd.addLineSite( id_list[2], id_list[3])
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     # of = ovd.Offset( vd.getGraph() ) # pass the created graph to the Offset class
     # of.str()
     # ofs = of.offset(0.123)
-    # print ofs
+    # print(ofs)
     # drawOffsets(myscreen, ofs)
 
     pi = ovd.PolygonInterior(True)
@@ -162,13 +162,13 @@ if __name__ == "__main__":
     of = ovd.Offset(vd.getGraph())  # pass the created graph to the Offset class
 
     ofs = of.offset(0.123)
-    # print ofs
+    # print(ofs)
     ovdvtk.drawOffsets(myscreen, ofs)
 
     # of.offset(0.125)
 
     vod.setVDText2(times)
     vod.setAll()
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
     myscreen.render()
     myscreen.iren.Start()

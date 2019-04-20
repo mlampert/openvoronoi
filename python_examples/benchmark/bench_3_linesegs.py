@@ -12,12 +12,12 @@ import ovdgenerators
 def timeVoronoiPoints(Nmax):
     far = 1
     vd = ovd.VoronoiDiagram(far, int(math.floor(math.sqrt(2) * math.sqrt(Nmax))))
-    print "waiting for {0} random points..".format(Nmax)
+    print("waiting for {0} random points..".format(Nmax))
     sys.stdout.flush()
     t_before = time.time()
     plist = ovdgenerators.randomGenerators(far, Nmax)
     t_after = time.time()
-    print ".done in ", (t_after - t_before), " seconds"
+    print(".done in ", (t_after - t_before), " seconds")
     # plist = regularGridGenerators(far, Nmax)
     # plist = circleGenerators(far, Nmax)
     t_before = time.time()
@@ -31,7 +31,7 @@ def timeVoronoiSegs(Nmax, segtype=1):
     far = 1
     vd = ovd.VoronoiDiagram(far, int(math.floor(math.sqrt(2) * math.sqrt(Nmax))))
     vd.reset_vertex_count()
-    print "waiting for ", Nmax, " random segments..",
+    print("waiting for ", Nmax, " random segments..",)
     sys.stdout.flush()
     t_before = time.time()
     segs = []
@@ -40,8 +40,8 @@ def timeVoronoiSegs(Nmax, segtype=1):
     elif segtype == 2:
         segs = ovdgenerators.randomSegments2(far, Nmax, seed=1)
     t_after = time.time()
-    print ".done in {0:.3f} seconds".format((t_after - t_before))
-    # print " first seg is ", segs[0]
+    print(".done in {0:.3f} seconds".format((t_after - t_before)))
+    # print(" first seg is ", segs[0])
     id_list = []
     t_before = time.time()
     for s in segs:
@@ -66,7 +66,7 @@ def log2(x):
 
 
 if __name__ == "__main__":
-    print ovd.version()
+    print(ovd.version())
     far = 1
     Nmax_exp_start = 13
     Nmax_exp_end = 20
@@ -89,23 +89,23 @@ if __name__ == "__main__":
     for e in exp_list:
         Nmax_list.append([n, int(math.floor((math.pow(2, e))))])
         n = n + 1
-    print "Benchmarking for : "
-    print Nmax_list
+    print("Benchmarking for : ")
+    print(Nmax_list)
     # exit()
-    csvWriter = csv.writer(open('results_rand_opt.csv', 'wb'), delimiter=',')
+    csvWriter = csv.writer(open('results_rand_opt.csv', 'w'), delimiter=',')
     for case in Nmax_list:
         n = case[0]
         Nmax = case[1]
         # times = timeVoronoiPoints(Nmax)
         times = timeVoronoiSegs(Nmax, segtype=1)
-        print n, " voronoi-diagram for ", Nmax, " sites took {0:.3f}".format(sum(times)),
-        print " seconds, {0:.2f}".format(1e6 * float(sum(times)) / (float(Nmax) * float(log2(Nmax)))), "us/n*log2(n)"
+        print(n, " voronoi-diagram for ", Nmax, " sites took {0:.3f}".format(sum(times)),)
+        print(" seconds, {0:.2f}".format(1e6 * float(sum(times)) / (float(Nmax) * float(log2(Nmax)))), "us/n*log2(n)")
 
         if len(times) == 2:
-            print "   ", 2 * Nmax, " point-sites sites took {0:.3f}".format(times[0]), " seconds, {0:.2f}".format(
-                1e6 * float(times[0]) / (float(2 * Nmax) * float(log2(2 * Nmax)))), "us/n*log2(n)"
-            print "   ", Nmax, " line-sites sites took {0:.3f}".format(times[1]), " seconds, {0:.2f}".format(
-                1e6 * float(times[1]) / (float(Nmax) * float(log2(Nmax)))), "us/n*log2(n)"
+            print("   ", 2 * Nmax, " point-sites sites took {0:.3f}".format(times[0]), " seconds, {0:.2f}".format(
+                1e6 * float(times[0]) / (float(2 * Nmax) * float(log2(2 * Nmax)))), "us/n*log2(n)")
+            print("   ", Nmax, " line-sites sites took {0:.3f}".format(times[1]), " seconds, {0:.2f}".format(
+                1e6 * float(times[1]) / (float(Nmax) * float(log2(Nmax)))), "us/n*log2(n)")
         row = []
         row.append(Nmax)
         for t in times:
@@ -113,4 +113,4 @@ if __name__ == "__main__":
         csvWriter.writerow(row)
         # gc.clean()
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")

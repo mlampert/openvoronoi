@@ -78,27 +78,27 @@ def rpg_vd(Npts, seed, debug):
     for p in poly:
         ocl_pt = ovd.Point(p[0], p[1])
         pts.append(ocl_pt)
-        print ocl_pt
+        print(ocl_pt)
 
     times = []
     id_list = []
     m = 0
     t_before = time.time()
     for p in pts:
-        # print " adding vertex ",m
+        # print(" adding vertex ",m)
         id_list.append(vd.addVertexSite(p))
         m = m + 1
     """
-    print "polygon is: "
+    print("polygon is: ")
     for idx in id_list:
-        print idx," ",
-    print "."
+        print(idx," ",)
+    print(".")
     """
     t_after = time.time()
     times.append(t_after - t_before)
 
-    # print " pts inserted in ", times[0], " s"
-    # print " vd-check: ",vd.check()
+    # print(" pts inserted in ", times[0], " s")
+    # print(" vd-check: ",vd.check())
     if (debug):
         vd.debug_on()
 
@@ -107,14 +107,14 @@ def rpg_vd(Npts, seed, debug):
         n_nxt = n + 1
         if n == (len(id_list) - 1):
             n_nxt = 0  # point 0 is the endpoint of the last segment
-        # print " adding line-site ", id_list[n]," - ", id_list[n_nxt]
+        # print(" adding line-site ", id_list[n]," - ", id_list[n_nxt])
         vd.addLineSite(id_list[n], id_list[n_nxt])
     t_after = time.time()
     times.append(t_after - t_before)
 
-    print " segs inserted in ", times[1], " s"
+    print(" segs inserted in ", times[1], " s")
     is_valid = vd.check()
-    print " vd-check: ", is_valid
+    print(" vd-check: ", is_valid)
 
     return [is_valid, vd, times]
 
@@ -126,16 +126,16 @@ def loop_run(Npts, max_seed, debug=False, debug_seed=-1):
     for seed in seed_range:
         debug2 = debug
         if (seed == debug_seed):
-            print "debug seed!"
+            print("debug seed!")
             debug2 = True
         result = rpg_vd(Npts, seed, debug2)
-        print "N=", Npts, " s=", seed, " ok?=", result
+        print("N=", Npts, " s=", seed, " ok?=", result)
         assert (result[0] == True)
 
 
 def single_run(Npts, seed, debug=False):
     result = rpg_vd(Npts, seed, debug)
-    print "N=", Npts, " s=", seed, " ok?=", result
+    print("N=", Npts, " s=", seed, " ok?=", result)
     assert (result[0] == True)
     return result
 

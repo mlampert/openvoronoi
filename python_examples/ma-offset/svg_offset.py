@@ -34,25 +34,25 @@ def insert_polygon_points(vd, poly):
 def insert_polygon_points(vd, poly):
     pts=[]
     for p in poly:
-        #print("Inserting:{}".format(p))
+        #print("Inserting:{}".format(p)))
         pts.append( ovd.Point( *p ))
     id_list = []
-    print "inserting ",len(pts)," point-sites:"
+    print("inserting ",len(pts)," point-sites:")
     m=0
     for p in pts:
         id_list.append( vd.addVertexSite( p ) )
-        print " ",m," added vertex ", id_list[ len(id_list) -1 ]
+        print(" ",m," added vertex ", id_list[ len(id_list) -1 ])
         m=m+1
     return id_list
 
 def insert_polygon_segments(vd,id_list):
     j=0
-    print "inserting ",len(id_list)," line-segments:"
+    print("inserting ",len(id_list)," line-segments:")
     for n in range(len(id_list)):
         n_nxt = n+1
         if n==(len(id_list)-1):
             n_nxt=0
-        print " ",j,"inserting segment ",id_list[n]," - ",id_list[n_nxt]
+        print(" ",j,"inserting segment ",id_list[n]," - ",id_list[n_nxt])
         vd.addLineSite( id_list[n], id_list[n_nxt])
         j=j+1
 
@@ -80,7 +80,7 @@ def insert_bb(vd, svgr):
     insert_polygon_segments(vd,poly_id)
 
 if __name__ == "__main__":  
-    #print ocl.revision()
+    #print(ocl.revision())
     #w=2500
     #h=1500
     
@@ -111,7 +111,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far,120)
-    print ovd.version()
+    print(ovd.version())
     
     # for vtk visualization
     vod = ovdvtk.VD(myscreen,vd,float(scale), textscale=0.01, vertexradius=0.003)
@@ -126,8 +126,8 @@ if __name__ == "__main__":
     vd.setEdgeOffset(0.05)
     times = insert_many_polygons(vd,svgr)
 
-    print "all sites inserted. "
-    print "VD check: ", vd.check()
+    print("all sites inserted. ")
+    print("VD check: ", vd.check())
 
     pi = ovd.PolygonInterior(  True )
     vd.filter_graph(pi)
@@ -145,6 +145,6 @@ if __name__ == "__main__":
     #vd.filter_graph(ma)
     vod.setVDText2(times)
     vod.setAll()
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
     myscreen.render()   
     myscreen.iren.Start()

@@ -9,7 +9,7 @@ def regular_n_polygon(n=3, verbose=True):
     r = 0.9
     # input points (vertices/sites)
     if verbose:
-        print "regular polygon n=%d" % (n)
+        print("regular polygon n=%d" % (n))
     id_list = []
     for i in range(n):
         a = math.pi * i / n * 2.0
@@ -17,16 +17,16 @@ def regular_n_polygon(n=3, verbose=True):
         y = r * math.sin(a)
         id_list.append(vd.addVertexSite(ovd.Point(x, y)))
         if verbose:
-            print "%d angle=%1.3f point=(%1.3f, %1.3f) id=%d" % (i, a, x, y, id_list[-1])
+            print("%d angle=%1.3f point=(%1.3f, %1.3f) id=%d" % (i, a, x, y, id_list[-1]))
 
     for i in range(n):
         if verbose:
-            print "add line", i, ":", id_list[i - 1], id_list[i]
+            print("add line", i, ":", id_list[i - 1], id_list[i])
         # on first iteration negative index, but that's ok
         vd.addLineSite(id_list[i - 1], id_list[i])
     check = vd.check()
     if verbose:
-        print "VD check: ", check
+        print("VD check: ", check)
     return check
 
 

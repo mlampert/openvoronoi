@@ -114,7 +114,7 @@ def circleGenerators(far, Nmax, shuffle=1, seed=0):
 def regularGridGenerators(far, Nmax, shuffle=0):
     # REGULAR GRID
     rows = int(math.sqrt(Nmax))
-    # print "rows= ",rows
+    # print("rows= ",rows)
     gpos = [-0.7 * far, 1.4 * far / float(rows - 1)]  # start, stride
     plist = []
     for n in range(rows):

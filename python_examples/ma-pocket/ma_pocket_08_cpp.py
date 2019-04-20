@@ -139,7 +139,7 @@ def final_lead_out(myscreen, prv_tang, nxt_tang, c1, r1, c2, r2, prv, nxt):
 
 
 def spiral_clear(myscreen, out_tangent, in_tangent, c1, r1, c2, r2, out1, in1):
-    print "( spiral clear! )"
+    print("( spiral clear! )")
     ngc_writer.pen_up()
 
     # end spiral at in1
@@ -149,9 +149,9 @@ def spiral_clear(myscreen, out_tangent, in_tangent, c1, r1, c2, r2, out1, in1):
     in1_dir = in1 - c1
     in1_theta = math.atan2(in1_dir.y, in1_dir.x)
     # in1_theta = in1_theta
-    # print "c1 =", c1
-    # print "in1 = ",in1
-    # print " end theta = ",in1_theta
+    # print("c1 =", c1)
+    # print("in1 = ",in1)
+    # print(" end theta = ",in1_theta)
     drawPoint(myscreen, c1, ovdvtk.red)
     # drawPoint( myscreen, in1, ovdvtk.blue, 0.006 )
     # width = 2*pi*b
@@ -173,11 +173,11 @@ def spiral_clear(myscreen, out_tangent, in_tangent, c1, r1, c2, r2, out1, in1):
             break
         else:
             theta_min = theta_min - dtheta
-    # print "start_theta = ", theta_min
+    # print("start_theta = ", theta_min)
 
     Npts = (theta_max - theta_min) / dtheta
     Npts = int(Npts)
-    # print "spiral has ",Npts," points"
+    # print("spiral has ",Npts," points")
     p = ovd.Point(c1)
     ngc_writer.xy_rapid_to(p.x, p.y)
     ngc_writer.pen_down()
@@ -194,7 +194,7 @@ def spiral_clear(myscreen, out_tangent, in_tangent, c1, r1, c2, r2, out1, in1):
         theta_end = theta
 
     # add a complete circle after the spiral.
-    print "( spiral-clear: final circle )"
+    print("( spiral-clear: final circle )")
     Npts = (2 * math.pi) / dtheta
     Npts = int(Npts)
     for n in range(Npts + 2):
@@ -333,14 +333,14 @@ def drawOffsets2(myscreen, ofs):
                 previous = p
             n = n + 1
         ofs_points.append(points)
-        # print "rendered loop ",nloop, " with ", len(lop), " points"
+        # print("rendered loop ",nloop, " with ", len(lop), " points")
         nloop = nloop + 1
 
     # now draw each loop with polydata
     oPoints = vtk.vtkPoints()
     lineCells = vtk.vtkCellArray()
     # self.colorLUT = vtk.vtkLookupTable()
-    # print len(ofs_points)," loops to render:"
+    # print(len(ofs_points)," loops to render:")
     idx = 0
     last_idx = 0
 
@@ -348,7 +348,7 @@ def drawOffsets2(myscreen, ofs):
         epts = of
         segs = []
         first = 1
-        # print " loop with ", len(epts)," points"
+        # print(" loop with ", len(epts)," points")
         for p in epts:
             oPoints.InsertNextPoint(p.x, p.y, 0)
             if first == 0:
@@ -363,7 +363,7 @@ def drawOffsets2(myscreen, ofs):
             line = vtk.vtkLine()
             line.GetPointIds().SetId(0, seg[0])
             line.GetPointIds().SetId(1, seg[1])
-            # print " indexes: ", seg[0]," to ",seg[1]
+            # print(" indexes: ", seg[0]," to ",seg[1])
             lineCells.InsertNextCell(line)
 
     linePolyData = vtk.vtkPolyData()
@@ -385,25 +385,25 @@ def insert_polygon_points(vd, pts):
     #    pts.append( ovd.Point( p[0], p[1] ) )
     id_list = []
 
-    # print "inserting ",len(pts)," point-sites:"
+    # print("inserting ",len(pts)," point-sites:")
     m = 0
     for p in pts:
         id_list.append(vd.addVertexSite(p))
-        # print " ",m," added vertex ", id_list[ len(id_list) -1 ], " at ",p
+        # print(" ",m," added vertex ", id_list[ len(id_list) -1 ], " at ",p)
         m = m + 1
 
-        # print "id list is ", id_list
+        # print("id list is ", id_list)
     return id_list
 
 
 def insert_polygon_segments(vd, id_list):
     j = 0
-    # print "inserting ",len(id_list)," line-segments:"
+    # print("inserting ",len(id_list)," line-segments:")
     for n in range(len(id_list)):
         n_nxt = n + 1
         if n == (len(id_list) - 1):
             n_nxt = 0
-        # print " ",j,"inserting segment ",id_list[n]," - ",id_list[n_nxt]
+        # print(" ",j,"inserting segment ",id_list[n]," - ",id_list[n_nxt])
         vd.addLineSite(id_list[n], id_list[n_nxt])
         j = j + 1
 
@@ -421,7 +421,7 @@ def insert_offset_loop(vd, ofs):
         loop = []
         first = True
         for of in ofloop:
-            # print of
+            # print(of)
             if first:
                 # loop.append( of[0] )
                 previous = of[0]
@@ -441,7 +441,7 @@ def insert_offset_loop(vd, ofs):
 
         segs.append(loop)
 
-    # print segs
+    # print(segs)
     t_before = time.time()
     for poly in segs:
         poly_id = insert_polygon_points(vd, poly)
@@ -494,11 +494,11 @@ if __name__ == "__main__":
     foo = WritableObject()  # a writable object
     sys.stdout = foo  # redirection
 
-    print "( Medial-Axis pocketing. Proof-of-principle. 2012-02-12 )"
-    print "( OpenVoronoi %s  )" % (ovd.version())
-    print "( TOOL/MILL,10,0,50 ) "
-    print "( COLOR,0,255,255 ) "
-    print "( STOCK/BLOCK,700.0000,400.0000,10.0000,350.0000,160.0000,5.0000 ) "
+    print("( Medial-Axis pocketing. Proof-of-principle. 2012-02-12 )")
+    print("( OpenVoronoi %s  )" % (ovd.version()))
+    print("( TOOL/MILL,10,0,50 ) ")
+    print("( COLOR,0,255,255 ) ")
+    print("( STOCK/BLOCK,700.0000,400.0000,10.0000,350.0000,160.0000,5.0000 ) ")
 
     linesegs = 1  # switch to turn on/off line-segments
 
@@ -515,20 +515,20 @@ if __name__ == "__main__":
 
     vd = ovd.VoronoiDiagram(far, 120)
     # t_after = time.time()
-    # print ".done in {0:.3f} s.".format( t_after-t_before )
+    # print(".done in {0:.3f} s.".format( t_after-t_before ))
     times = []
     id_list = []
     m = 0
     t_before = time.time()
     for p in pts:
         id_list.append(vd.addVertexSite(p))
-        # print m," added vertex", seg_id[0]
+        # print(m," added vertex", seg_id[0])
         m = m + 1
 
     t_after = time.time()
     times.append(t_after - t_before)
 
-    # print "all point sites inserted. "
+    # print("all point sites inserted. ")
     vd.check()
 
     t_before = time.time()
@@ -540,7 +540,7 @@ if __name__ == "__main__":
     t_after = time.time()
     times.append(t_after - t_before)
     vd.check()
-    print "( VD1 done in   %.3f s.  )" % (sum(times))
+    print("( VD1 done in   %.3f s.  )" % (sum(times)))
     # vod.setVDText2(times)
 
     pi = ovd.PolygonInterior(True)
@@ -551,16 +551,16 @@ if __name__ == "__main__":
     t_before = time.time()
     ofs = of.offset(0.03)
     t_after = time.time()
-    # print "( VD1 OFFSET in ", 1e3*(t_after-t_before)," milliseconds.  )"
-    print "( VD1 OFFSET in %.3f s.  )" % (1e3 * (t_after - t_before))
-    # print " offset is len=",len(ofs)
-    # print ofs
+    # print("( VD1 OFFSET in ", 1e3*(t_after-t_before)," milliseconds.  )")
+    print("( VD1 OFFSET in %.3f s.  )" % (1e3 * (t_after - t_before)))
+    # print(" offset is len=",len(ofs))
+    # print(ofs)
 
     # now create a new VD from the offset
     vd2 = ovd.VoronoiDiagram(1, 120)
     tim2 = insert_offset_loop(vd2, ofs)
-    # print "( VD2 done in ", 1e3*(sum(tim2))," milliseconds.  )"
-    print "( VD2 done in   %.3f s.  )" % (sum(tim2))
+    # print("( VD2 done in ", 1e3*(sum(tim2))," milliseconds.  )")
+    print("( VD2 done in   %.3f s.  )" % (sum(tim2)))
     # now offset outward
     pi = ovd.PolygonInterior(True)
     vd2.filter_graph(pi)
@@ -568,15 +568,15 @@ if __name__ == "__main__":
     t_before = time.time()
     ofs = of.offset(0.015)
     t_after = time.time()
-    # print "( VD2 OFFSET in ", 1e3*(t_after-t_before)," milliseconds.  )"
-    print "( VD2 OFFSET in %.3f s.  )" % (1e3 * (t_after - t_before))
+    # print("( VD2 OFFSET in ", 1e3*(t_after-t_before)," milliseconds.  )")
+    print("( VD2 OFFSET in %.3f s.  )" % (1e3 * (t_after - t_before)))
     drawOffsets2(myscreen, ofs)
 
     # now create the VD for pocketing
     vd3 = ovd.VoronoiDiagram(1, 120)
     times = insert_offset_loop(vd3, ofs)
-    # print "( VD3 done in ", 1e3*(sum(times))," milliseconds.  )"
-    print "( VD3 done in   %.3f s.  )" % (sum(times))
+    # print("( VD3 done in ", 1e3*(sum(times))," milliseconds.  )")
+    print("( VD3 done in   %.3f s.  )" % (sum(times)))
     vod3 = ovdvtk.VD(myscreen, vd3, float(scale), textscale=0.01, vertexradius=0.003)
 
     vod3.textScale = 0.0002
@@ -604,12 +604,12 @@ if __name__ == "__main__":
     # for mic_list in mic_components:
     mic_list = mic_components[0]  # mapocket.get_mic_list()
     t_after = time.time()
-    # print "( ma-pocket done in ", 1e3*(t_after-t_before)," milliseconds. got ",  len(mic_list)," MICs )"
-    print "( MA-pocket done in %.3f s. Got %d MICs )" % ((t_after - t_before), len(mic_list))
+    # print("( ma-pocket done in ", 1e3*(t_after-t_before)," milliseconds. got ",  len(mic_list)," MICs )")
+    print("( MA-pocket done in %.3f s. Got %d MICs )" % ((t_after - t_before), len(mic_list)))
 
     maxmic = mic_list[0]
 
-    # print maxmic
+    # print(maxmic)
     previous_center = maxmic[0]
     previous_radius = maxmic[1]
     cl = ovd.Point(0, 0)
@@ -666,7 +666,7 @@ if __name__ == "__main__":
             # spiral-clear the start-MIC. The spiral should end at in1
             spiral_clear(myscreen, out_tangent, in_tangent, previous_center, previous_radius, cen2, r2, previous_out1,
                          in1)
-            # print "No rapid-move on first-iteration."
+            # print("No rapid-move on first-iteration.")
             first = False
 
         # in bi-tangent
@@ -685,14 +685,14 @@ if __name__ == "__main__":
             # end of operation. do a final lead-out arc.
             final_lead_out(myscreen, out_tangent, in_tangent, previous_center, previous_radius, cen2, r2, previous_out1,
                            in1)
-            # print "Final lead-out arc"
+            # print("Final lead-out arc")
 
         nframe = nframe + 1
         myscreen.render()
 
-    # print "mic-pocket done."
+    # print("mic-pocket done.")
 
-    # print "PYTHON All DONE."
+    # print("PYTHON All DONE.")
 
     ngc_writer.postamble()
 
@@ -701,10 +701,10 @@ if __name__ == "__main__":
     f = open('output.nc', 'w')
     for item in foo.content:
         if item != '\n':
-            print>> f, item
+            print(item, file=f)
     f.close()
 
-    print "python done."
+    print("python done.")
 
     myscreen.render()
     myscreen.iren.Start()

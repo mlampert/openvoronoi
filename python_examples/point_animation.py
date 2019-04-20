@@ -23,7 +23,7 @@ def writeFrame(w2if, lwr, n):
 def regularGridGenerators(far, Nmax):
     # REGULAR GRID
     rows = int(math.sqrt(Nmax))
-    print "rows= ", rows
+    print("rows= ", rows)
     gpos = [-0.7 * far, 1.4 * far / float(rows - 1)]  # start, stride
     plist = []
     for n in range(rows):
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     npts = Nmax - 1
     for p in plist:
         if n < npts:
-            print n, " adding ", p
+            print(n, " adding ", p)
             id_list.append(vd.addVertexSite(p))
             n = n + 1
     nstep = 7
@@ -122,13 +122,13 @@ if __name__ == "__main__":
     calctime = t_after - t_before
     if Nmax == 0:
         Nmax = 1
-    print " VD done in ", calctime, " s, ", calctime / Nmax, " s per generator"
+    print(" VD done in ", calctime, " s, ", calctime / Nmax, " s per generator")
 
     vod.setAll()
     myscreen.render()
     writeFrame(w2if, lwr, nstep)
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

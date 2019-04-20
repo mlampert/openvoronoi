@@ -30,7 +30,7 @@ def histogram(L):
 
 def sortedDict(adict):
     keys = adict.keys()
-    keys.sort()
+    keys = sorted(keys)
     l = []
     for key in keys:
         d = []
@@ -48,34 +48,34 @@ if __name__ == "__main__":
     zmult = 4
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     Nmax = 2000
     us_guess = 250
     cpu_seconds_guess = (us_guess/1.0e6)*Nmax * (math.log(Nmax) / math.log(2))
-    print "calculating VD for ", Nmax, " point-sites... (may take about %.1f seconds)" % cpu_seconds_guess
+    print("calculating VD for ", Nmax, " point-sites... (may take about %.1f seconds)" % cpu_seconds_guess)
     plist = randomGenerators(far, Nmax)
     t_before = time.time()
     n = 0
     # id_list=[]
     for p in plist:
-        # print n," adding ",p
+        # print(n," adding ",p)
         vd.addVertexSite(p)
         n = n + 1
     t_after = time.time()
     calctime = t_after - t_before
-    print " VD done in ", calctime, " s, ", 1e6 * calctime / (
-            Nmax * (math.log(Nmax) / math.log(2))), " us per n*log2(n)"
+    print(" VD done in ", calctime, " s, ", 1e6 * calctime / (
+            Nmax * (math.log(Nmax) / math.log(2))), " us per n*log2(n)")
     stat = vd.getFaceStats()
     data = []
     for s in stat:
         data.append(s[2])
     hist = histogram(data)
     hist2 = sortedDict(hist)
-    print "distribution of faces with n edges in poisson vd with", Nmax, " point-sites:"
-    print hist2
+    print("distribution of faces with n edges in poisson vd with", Nmax, " point-sites:")
+    print(hist2)
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     # myscreen.render()    
     # myscreen.iren.Start()

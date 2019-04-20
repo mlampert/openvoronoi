@@ -193,7 +193,7 @@ class CircleCircle:
             self.alfa3 = (c2.r * c2.r - c1.r * c1.r - self.d * self.d) / (2 * self.d)
             self.alfa4 = (c2.cw * c2.r - c1.cw * c1.r) / self.d  # k1 k2 (expand/contract??)
         self.c1 = c1  # store all of c1 also??
-        # print " alfa4:",self.alfa4
+        # print(" alfa4:",self.alfa4)
         self.tmin = ((c1.c - c2.c).norm() - c2.r - c1.r) / 2
         self.tmax = 100
 
@@ -260,7 +260,7 @@ class CircleLine:
         self.tmin = (abs(self.alfa3) - c1.r) / (2.0)
 
         self.tmax = 100
-        print " tmax=", self.tmax, " tmin=", self.tmin
+        print(" tmax=", self.tmax, " tmin=", self.tmin)
 
     def getX(self):
         x = []
@@ -294,8 +294,8 @@ class Bisector:
         self.bis = Bis
         self.x = Bis.getX()
         self.y = Bis.getY()
-        # print self.y
-        # print self.x
+        # print(self.y)
+        # print(self.x)
 
     def Point(self, t, k):
         x = self.x
@@ -328,11 +328,11 @@ class Bisector:
             t3 = (y[6]-y[4]) / (y[5]-y[7])
             t4 = (-y[4]-y[6]) / (y[5]+y[7])
         else:
-            print "NO solutions!"
-        print " t1 solution= ",t1
-        print " t2 solution= ",t2
-        print " t3 solution= ",t3
-        print " t4 solution= ",t4
+            print("NO solutions!")
+        print(" t1 solution= ",t1)
+        print(" t2 solution= ",t2)
+        print(" t3 solution= ",t3)
+        print(" t4 solution= ",t4)
         return t2
      """
 
@@ -344,7 +344,7 @@ class Bisector:
         for i in range(N):
             t = tmin + i * dt
             tlist.append(t)
-        # print tlist
+        # print(tlist)
         return tlist
         # compute range of t-values with N pts
 
@@ -431,8 +431,8 @@ def drawLineLineTest():
 
     l1l2 = LineLine(l1, l2)  # bisectors
     l2l1 = LineLine(l2, l1)  # it should not matter if we call with (l1,l2) or (l2,l1) (?)
-    print l1l2
-    print l2l1
+    print(l1l2)
+    print(l2l1)
     b1 = Bisector(l1l2)
     b2 = Bisector(l2l1)
     drawBisector(myscreen, b1)
@@ -556,7 +556,7 @@ def drawSeparatorSolver1(alfa=6.4):
 
     # 1st degree equation gives t directly:
     tsln = -(l3.a * p2.x + l3.b * p2.y + l3.c) / (sv.x * l3.a + sv.y * l3.b + l3.k)
-    print tsln
+    print(tsln)
     psln = p2 + tsln * sv
     drawVertex(myscreen, psln, ovdvtk.pink, rad=1)
     drawCircle(myscreen, psln, tsln, ovdvtk.pink)
@@ -615,7 +615,7 @@ def drawSeparatorSolver2(px=10, py=20):
     dy = p2.y - p3.y
     tsln = -(dx * dx + dy * dy) / (2 * (dx * sv.x + dy * sv.y))
 
-    print tsln
+    print(tsln)
     psln = p2 + tsln * sv
     drawVertex(myscreen, psln, ovdvtk.pink, rad=1)
     drawCircle(myscreen, psln, tsln, ovdvtk.pink)
@@ -721,14 +721,14 @@ def drawBitangents():
     #     ( c2x r2-C )
     lines = []
     detM = c1.x * c2.y - c2.x * c1.y
-    print "detM= ", detM
+    print("detM= ", detM)
     m = (c1.y - c2.y) / detM
     p = (c2.x - c1.x) / detM
 
     n = (c2.y * r1 - c1.y * r2) / detM
     q = (c1.x * r2 - c2.x * r1) / detM
     roots1 = quadratic_roots(m * m + p * p, 2 * (m * n + p * q), n * n + q * q - 1)
-    print "roots1 ", roots1
+    print("roots1 ", roots1)
     for r in roots1:
         lines.append(root_to_line(r, m, n, p, q))
 
@@ -736,7 +736,7 @@ def drawBitangents():
     n = ( c2.y*(-1)*r1 - c1.y*(-1)*r2 ) / detM
     q = ( c1.x*(-1)*r2 - c2.x*(-1)*r1 ) / detM
     roots2 = quadratic_roots( m*m+p*p, 2*(m*n+p*q),  n*n+q*q-1)
-    print "roots2 ", roots2
+    print("roots2 ", roots2)
     for r in roots2:
         lines.append( root_to_line(r,m,n,p,q) )
     """
@@ -761,7 +761,7 @@ def drawBitangents():
     drawCircle(myscreen, p4, 0.5, ovdvtk.pink)
 
     # drawLine( myscreen, l2, ovdvtk.orange )
-    # print roots
+    # print(roots)
 
     myscreen.render()
     myscreen.iren.Start()
@@ -771,7 +771,7 @@ def root_to_line(root, m, n, p, q):
     C = root
     A = m * C + n
     B = p * C + q
-    print A, " ", B, " ", C, " ", A * A + B * B
+    print(A, " ", B, " ", C, " ", A * A + B * B)
     l = Line(A, B, C, 1)
     return l
 
@@ -796,8 +796,8 @@ def drawBitangents2():
     drawCircle(myscreen, c2, r2, ovdvtk.green)
     # when machining c2 the maximum cut-width is 
     # w_max = | c2 - c1 | + r2 - r1
-    # print "dr = ",dr
-    print " cut-width = ", ((c2 - c1).norm() + r2 - r1)
+    # print("dr = ",dr)
+    print(" cut-width = ", ((c2 - c1).norm() + r2 - r1))
     [bd1, bd2] = bitanget_direction(c1, c2, r1, r2)
     # from C, go a distance r along the normal to the line.
     p1 = c1 + r1 * bd1
@@ -825,8 +825,8 @@ def bitanget_direction(c1, c2, r1, r2):
     # r_large=0
     # c_small=c1
     # c_large=c2
-    print " c1 ", c1
-    print " c2 ", c2
+    print(" c1 ", c1)
+    print(" c2 ", c2)
     """
     if r1>r2:
         r_large = r1
@@ -851,9 +851,9 @@ def bitanget_direction(c1, c2, r1, r2):
     cdir = c2 - c1  # (c_large-c_small)
     if r1 > r2:
         cdir = c1 - c2
-    # print cdir
+    # print(cdir)
     cdir = cdir * (1 / cdir.norm())  # (c_large-c_small).normalize()
-    # print cdir
+    # print(cdir)
     bit1 = bitang_c1c2 * cdir + height * cdir.xy_perp()
     bit2 = bitang_c1c2 * cdir - height * cdir.xy_perp()
     bit1 = bit1 * (1 / bit1.norm())

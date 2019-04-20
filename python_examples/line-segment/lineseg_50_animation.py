@@ -107,7 +107,7 @@ def drawFrame(Nmax, myscreen, vd, vod, framenr, anim, step):
 
     vod.setAll()
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     # myscreen.iren.Start()
@@ -141,7 +141,7 @@ def drawLinesegFrame(Nmax, myscreen, vd, vod, framenr, anim, step):
             vd.addLineSite(s[0], s[1])
             anim_count = anim_count + 1
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
 

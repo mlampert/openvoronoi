@@ -22,10 +22,10 @@ def drawSeg(myscreen, previous, p):
         radius = p[2]
         cw = p[3]
         center = ovd.Point(p[4], p[5])
-        # print "prev ",prev
-        # print "center ",center
-        # print "diff ",prev-center
-        # print "p ",p
+        # print("prev ",prev)
+        # print("center ",center)
+        # print("diff ",prev-center)
+        # print("p ",p)
         ovdvtk.drawArc(myscreen, prev, target, radius, center, cw, ovdvtk.orange)
         #      drawArc(myscreen,  pt1,    pt2,      r, cen,     cw, arcColor, da=0.1)
         # r, cen, cw, arcColor, da=0.1)
@@ -68,9 +68,9 @@ def drawLoops(myscreen, loops, loopColor):
 
                 previous = p
             n = n + 1
-        print "rendered loop ", nloop, " with ", len(lop), " points"
-        print "   n_lines = ", n_lines
-        print "   n_arcs  = ", n_arcs
+        print("rendered loop ", nloop, " with ", len(lop), " points")
+        print("   n_lines = ", n_lines)
+        print("   n_arcs  = ", n_arcs)
 
         nloop = nloop + 1
 
@@ -121,23 +121,23 @@ def draw_ttt(myscreen, text, x, y, scale):
 
     segs = wr.get_segments()
     segs = translate(segs, x, y)
-    print "number of polygons: ", len(segs)
+    print("number of polygons: ", len(segs))
     np = 0
     sum_pts = 0
 
     segs = modify_segments(segs)
     for s in segs:
         sum_pts += len(s)
-        print " polygon ", np, " has ", len(s), " points"
+        print(" polygon ", np, " has ", len(s), " points")
         np = np + 1
-    print "total points: ", sum_pts
+    print("total points: ", sum_pts)
     drawLoops(myscreen, segs, ovdvtk.yellow)
 
 
 # this script only draws geometry from ttt
 # no voronoi-diagram is created!
 if __name__ == "__main__":
-    print "ttt version = ", ttt.version()
+    print("ttt version = ", ttt.version())
     # w=2500
     # h=1500
 
@@ -167,7 +167,7 @@ if __name__ == "__main__":
     # draw_ttt(myscreen, "abcdefghijklmnopqrstuvwxyz", -0.5,-0.1,80000)
     # draw_ttt(myscreen, "1234567890*", -0.5,-0.2,80000)
     # draw_ttt(myscreen, "m", -0.5,-0.2,80000)
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

@@ -14,7 +14,7 @@ def drawLoops(myscreen, loops, loopColor):
         first_point = []
         previous = []
         for p in lop:
-            #print p
+            #print(p)
             if n == 0:  # don't draw anything on the first iteration
                 previous = p
                 first_point = p
@@ -26,10 +26,10 @@ def drawLoops(myscreen, loops, loopColor):
                     ovdvtk.Line(p1=(p[0], p[1], 0), p2=(first_point[0], first_point[1], 0), color=loopColor))
             else:
                 myscreen.addActor(ovdvtk.Line(p1=(previous[0], previous[1], 0), p2=(p[0], p[1], 0), color=loopColor))
-                print "line ", previous, " to ", p
+                print("line ", previous, " to ", p)
                 previous = p
             n = n + 1
-        print "rendered loop ", nloop, " with ", len(lop), " points"
+        print("rendered loop ", nloop, " with ", len(lop), " points")
         nloop = nloop + 1
 
 
@@ -76,10 +76,10 @@ def draw_ttt(myscreen, text, x, y, scale):
 
     segs = wr.get_segments()
     segs = translate(segs, x, y)
-    print "number of polygons: ", len(segs)
+    print("number of polygons: ", len(segs))
     np = 0
     for s in segs:
-        print " polygon ", np, " has ", len(s), " points"
+        print(" polygon ", np, " has ", len(s), " points")
         np = np + 1
     segs = modify_segments(segs)
     drawLoops(myscreen, segs, ovdvtk.yellow)
@@ -88,7 +88,7 @@ def draw_ttt(myscreen, text, x, y, scale):
 # this script only draws geometry from ttt
 # no voronoi-diagram is created!
 if __name__ == "__main__":
-    print "ttt version = ", ttt.version()
+    print("ttt version = ", ttt.version())
     # w=2500
     # h=1500
 
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     # draw_ttt(myscreen, "abcdefghijklmnopqrstuvwxyz", -0.5,-0.1,80000)
     # draw_ttt(myscreen, "1234567890*", -0.5,-0.2,80000)
     # draw_ttt(myscreen, "m", -0.5,-0.2,80000)
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

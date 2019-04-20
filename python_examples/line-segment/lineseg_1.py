@@ -23,7 +23,7 @@ def writeFrame(w2if, lwr, n):
 def regularGridGenerators(far, Nmax):
     # REGULAR GRID
     rows = int(math.sqrt(Nmax))
-    print "rows= ", rows
+    print("rows= ", rows)
     gpos = [-0.7 * far, 1.4 * far / float(rows - 1)]  # start, stride
     plist = []
     for n in range(rows):
@@ -71,7 +71,7 @@ def circleGenerators(far, Nmax):
 
 
 if __name__ == "__main__":
-    # print ocl.revision()
+    # print(ocl.revision())
     myscreen = ovdvtk.VTKScreen(width=1024, height=720)  # (width=1920, height=1080)
     ovdvtk.drawOCLtext(myscreen, rev_text=ovd.version())
 
@@ -94,9 +94,9 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
     vd.check()
-    print "created."
+    print("created.")
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -125,14 +125,14 @@ if __name__ == "__main__":
     # + regularGridGenerators(far, Nmax) + circleGenerators(far, Nmax)
 
     # plist = [ovd.Point(0,0)]
-    print plist
+    print(plist)
     times = []
     t_before = time.time()
     n = 0
     id_list = []
     # vd.debug_on()
     for p in plist:
-        print n, " adding ", p
+        print(n, " adding ", p)
         id_list.append(vd.addVertexSite(p))
         n = n + 1
     t_after = time.time()
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     id2 = id_list[1]
     id3 = id_list[2]
     id4 = id_list[3]
-    # print "add segment ",id1, " to ", id2
+    # print("add segment ",id1, " to ", id2)
     vd.debug_on()
     vd.addLineSite(id1, id2)
 
@@ -153,14 +153,14 @@ if __name__ == "__main__":
     times.append(calctime)
     if Nmax == 0:
         Nmax = 1
-    print " VD done in ", calctime, " s, ", calctime / Nmax, " s per generator"
+    print(" VD done in ", calctime, " s, ", calctime / Nmax, " s per generator")
 
     vod.setVDText2(times)
 
     vod.setAll()
     myscreen.render()
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

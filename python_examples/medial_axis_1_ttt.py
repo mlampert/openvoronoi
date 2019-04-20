@@ -77,7 +77,7 @@ def drawOffsets(myscreen, ofs):
                 # myscreen.addActor( ovdvtk.Line(p1=(previous.x,previous.y,0),p2=(p.x,p.y,0),color=loopColor) )
                 previous = p
             n = n + 1
-        print "rendered loop ", nloop, " with ", len(lop), " points"
+        print("rendered loop ", nloop, " with ", len(lop), " points")
         nloop = nloop + 1
 
 
@@ -163,14 +163,14 @@ def drawOffsets2(myscreen, ofs):
                 previous = p
             n = n + 1
         ofs_points.append(points)
-        # print "rendered loop ",nloop, " with ", len(lop), " points"
+        # print("rendered loop ",nloop, " with ", len(lop), " points")
         nloop = nloop + 1
 
     # now draw each loop with polydata
     oPoints = vtk.vtkPoints()
     lineCells = vtk.vtkCellArray()
     # self.colorLUT = vtk.vtkLookupTable()
-    print len(ofs_points), " loops to render:"
+    print(len(ofs_points), " loops to render:")
     idx = 0
     last_idx = 0
 
@@ -178,7 +178,7 @@ def drawOffsets2(myscreen, ofs):
         epts = of
         segs = []
         first = 1
-        print " loop with ", len(epts), " points"
+        print(" loop with ", len(epts), " points")
         for p in epts:
             oPoints.InsertNextPoint(p.x, p.y, 0)
             if first == 0:
@@ -193,7 +193,7 @@ def drawOffsets2(myscreen, ofs):
             line = vtk.vtkLine()
             line.GetPointIds().SetId(0, seg[0])
             line.GetPointIds().SetId(1, seg[1])
-            # print " indexes: ", seg[0]," to ",seg[1]
+            # print(" indexes: ", seg[0]," to ",seg[1])
             lineCells.InsertNextCell(line)
 
     linePolyData = vtk.vtkPolyData()
@@ -214,23 +214,23 @@ def insert_polygon_points(vd, polygon):
     for p in polygon:
         pts.append(ovd.Point(p[0], p[1]))
     id_list = []
-    print "inserting ", len(pts), " point-sites:"
+    print("inserting ", len(pts), " point-sites:")
     m = 0
     for p in pts:
         id_list.append(vd.addVertexSite(p))
-        # print " ",m," added vertex ", id_list[ len(id_list) -1 ]
+        # print(" ",m," added vertex ", id_list[ len(id_list) -1 ])
         m = m + 1
     return id_list
 
 
 def insert_polygon_segments(vd, id_list):
     j = 0
-    print "inserting ", len(id_list), " line-segments:"
+    print("inserting ", len(id_list), " line-segments:")
     for n in range(len(id_list)):
         n_nxt = n + 1
         if n == (len(id_list) - 1):
             n_nxt = 0
-        # print " ",j,"inserting segment ",id_list[n]," - ",id_list[n_nxt]
+        # print(" ",j,"inserting segment ",id_list[n]," - ",id_list[n_nxt])
         vd.addLineSite(id_list[n], id_list[n_nxt])
         j = j + 1
 
@@ -299,7 +299,7 @@ def modify_segments(segs):
 
 
 if __name__ == "__main__":
-    # print ocl.revision()
+    # print(ocl.revision())
     # w=2500
     # h=1500
 
@@ -322,7 +322,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -342,8 +342,8 @@ if __name__ == "__main__":
     segs = modify_segments(segs)
 
     times = insert_many_polygons(vd, segs)
-    print "all sites inserted. "
-    print "VD check: ", vd.check()
+    print("all sites inserted. ")
+    print("VD check: ", vd.check())
 
     pi = ovd.PolygonInterior(True)
     vd.filter_graph(pi)
@@ -352,6 +352,6 @@ if __name__ == "__main__":
 
     vod.setVDText2(times)
     vod.setAll()
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
     myscreen.render()
     myscreen.iren.Start()

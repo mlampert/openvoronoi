@@ -47,7 +47,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -75,22 +75,22 @@ if __name__ == "__main__":
     pts = [p1, p2, p3, p4, p5]
 
     # t_after = time.time()
-    # print ".done in {0:.3f} s.".format( t_after-t_before )
+    # print(".done in {0:.3f} s.".format( t_after-t_before ))
     times = []
     id_list = []
     m = 0
     t_before = time.time()
     for p in pts:
         id_list.append(vd.addVertexSite(p))
-        # print m," added vertex", seg_id[0]
+        # print(m," added vertex", seg_id[0])
         m = m + 1
 
     t_after = time.time()
     times.append(t_after - t_before)
     # exit()
 
-    # print "   ",2*Nmax," point-sites sites took {0:.3f}".format(times[0])," seconds, {0:.2f}".format( 1e6*float( times[0] )/(float(2*Nmax)*float(math.log10(2*Nmax))) ) ,"us/n*log(n)"
-    print "all point sites inserted. "
+    # print("   ",2*Nmax," point-sites sites took {0:.3f}".format(times[0])," seconds, {0:.2f}".format( 1e6*float( times[0] )/(float(2*Nmax)*float(math.log10(2*Nmax))) ) ,"us/n*log(n)")
+    print("all point sites inserted. ")
     vd.check()
 
     # nsegs = Nmax
@@ -138,16 +138,16 @@ if __name__ == "__main__":
         for n in range(len(mic_list)):
             mic = mic_list[n]
             if n == 0:
-                print "hello", mic[0], " r = ", mic[1]
+                print("hello", mic[0], " r = ", mic[1])
                 drawCircle(myscreen, mic[0], mic[1], ovdvtk.red)
             else:
                 drawCircle(myscreen, mic[0], mic[1], ovdvtk.green)
-    print "mic done."
+    print("mic done.")
     vod.setVDText2(times)
 
     vod.setAll()
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     # w2if.Modified()

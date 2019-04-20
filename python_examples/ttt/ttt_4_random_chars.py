@@ -13,20 +13,20 @@ def insert_polygon_points(vd, polygon):
     for p in polygon:
         pts.append(ovd.Point(p[0], p[1]))
     id_list = []
-    print "inserting ", len(pts), " point-sites:"
+    print("inserting ", len(pts), " point-sites:")
     m = 0
     for p in pts:
         id_list.append(vd.addVertexSite(p))
-        print " ", m, " added vertex ", id_list[len(id_list) - 1]
+        print(" ", m, " added vertex ", id_list[len(id_list) - 1])
         m = m + 1
-    print vd.numFaces(), " faces after all points inserted"
+    print(vd.numFaces(), " faces after all points inserted")
     return id_list
 
 
 def insert_polygon_segments(vd, id_list):
     j = 0
     jmax = 9999999  # for debugging, set jmax to the problematic case to stop algorithm in the middle
-    print "inserting ", len(id_list), " line-segments:"
+    print("inserting ", len(id_list), " line-segments:")
     for n in range(len(id_list)):
         n_nxt = n + 1
         if n == (len(id_list) - 1):
@@ -34,7 +34,7 @@ def insert_polygon_segments(vd, id_list):
 
         if (j < jmax):
             # vd.debug_on()
-            print " ", j, "inserting segment ", id_list[n], " - ", id_list[n_nxt]
+            print(" ", j, "inserting segment ", id_list[n], " - ", id_list[n_nxt])
 
             if 0:  # id_list[n] == 22871: #102187: # 102187/7 #115869: # 51456: 115869
                 vd.debug_on()
@@ -44,11 +44,11 @@ def insert_polygon_segments(vd, id_list):
                 vod.drawErrorVertices()
                 # verts=[92555, 51680,92624,52559,51474,92620,52805]
                 # for v in verts:
-                # print "drawing ",v
-                # print vod
-                # print dir(vod)
+                # print("drawing ",v)
+                # print(vod)
+                # print(dir(vod))
                 #    vod.drawVertexIdx(v)
-                print "PYTHON All DONE."
+                print("PYTHON All DONE.")
                 myscreen.render()
                 myscreen.iren.Start()
             else:
@@ -162,7 +162,7 @@ def get_scaled_segs(chars, length):
 
 
 if __name__ == "__main__":
-    print ttt.version()
+    print(ttt.version())
     # exit() 
     # w=2500
     # h=1500
@@ -197,15 +197,15 @@ if __name__ == "__main__":
         chars = get_random_row(row_length)
         [rowsegs, extents, scale] = get_scaled_segs(chars, length)
         rowsegs_t = translate(rowsegs, dx, current_y)
-        print "y-height is ", (extents.maxy - extents.miny)
-        print "scale is ", scale
+        print("y-height is ", (extents.maxy - extents.miny))
+        print("scale is ", scale)
         current_y = current_y + 1.1 * (extents.maxy - extents.miny) * scale
         segs += rowsegs_t
-        print chars
+        print(chars)
     # exit()
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
     vod.drawFarCircle()
@@ -222,16 +222,16 @@ if __name__ == "__main__":
     vd.check()
     vod.setVDText2(times)
     vod.setAll()
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     err = vd.getStat()
-    # print err 
-    print "got errorstats for ", len(err), " points"
+    # print(err )
+    print("got errorstats for ", len(err), " points")
     if len(err) > 1:
         minerr = min(err)
         maxerr = max(err)
-        print "min error= ", minerr
-        print "max error= ", maxerr
+        print("min error= ", minerr)
+        print("max error= ", maxerr)
 
     myscreen.render()
     myscreen.iren.Start()

@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
     vd = ovd.VoronoiDiagram(far, 120)
     vd.setEdgePoints(1000)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     segs = []
     id_list = []
     ssegs = []
-    print " inserting vertices: "
+    print(" inserting vertices: ")
     for n in range(Nmax):
         seg = randomGenerators()
         while segmentIntersects(segs, seg):
@@ -117,14 +117,14 @@ if __name__ == "__main__":
 
             id_list.append(seg_id)
         # n=n+1
-        # print seg[0].x," , ",seg[1].x
+        # print(seg[0].x," , ",seg[1].x)
 
     # exit()
 
     # vd2 = ovd.VoronoiDiagram(far,120)
 
     # exit()
-    # print seg_id2
+    # print(seg_id2)
     # exit()
 
     # nsegs = Nmax
@@ -145,16 +145,16 @@ if __name__ == "__main__":
 
     """
     err = vd.getStat()
-    #print err 
-    print "got ",len(err)," errors"
+    #print(err )
+    print("got ",len(err)," errors")
     minerr = min(err)
     maxerr = max(err)
-    print minerr
-    print maxerr
+    print(minerr)
+    print(maxerr)
     """
 
     for s in ssegs:
-        print s[0], " ", s[1]
+        print(s[0], " ", s[1])
     # 4 delete-tree
     # 5 create new vertices
     # 6 add startpoint separator
@@ -163,11 +163,11 @@ if __name__ == "__main__":
     calctime = t_after - t_before
     if Nmax == 0:
         Nmax = 1
-    print " VD done in ", calctime, " s, ", calctime / Nmax, " s per generator"
+    print(" VD done in ", calctime, " s, ", calctime / Nmax, " s per generator")
 
     vod.setAll()
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

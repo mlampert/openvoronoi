@@ -33,7 +33,7 @@ def drawDiagram(myscreen, vd):
         drawVertex(myscreen, v, ovdvtk.pink, 10)
     vde = vd.getVoronoiEdges()
 
-    print " got ", len(vde), " Voronoi edges"
+    print(" got ", len(vde), " Voronoi edges")
     for e in vde:
         drawEdge(myscreen, e, ovdvtk.cyan)
 
@@ -49,7 +49,7 @@ def writeFrame(w2if, lwr, n):
 def regularGridGenerators(far, Nmax, shuffle=0):
     # REGULAR GRID
     rows = int(math.sqrt(Nmax))
-    print "rows= ", rows
+    print("rows= ", rows)
     gpos = [-0.7 * far, 1.4 * far / float(rows - 1)]  # start, stride
     plist = []
     for n in range(rows):
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     plist = randomGenerators(far, Nmax) + regularGridGenerators(far, Nmax) + circleGenerators(far, Nmax)
 
     plist = [ovd.Point(0.622289, 0.522162), ovd.Point(0.81234, 0), ovd.Point(0.81234, -1.98966e-16)]
-    # print plist[169]
+    # print(plist[169])
     # exit()
     n = 1
     t_before = time.time()
@@ -136,8 +136,8 @@ if __name__ == "__main__":
     # ren = [0,1,Nmax-2, Nmax-1, Nmax]
     nf = 0
     for p in plist:  # [0:20]:
-        print "**********"
-        print "PYTHON: adding generator: ", n, " at ", p
+        print("**********")
+        print("PYTHON: adding generator: ", n, " at ", p)
 
         if n in ren:
             vod.setAll()
@@ -162,7 +162,7 @@ if __name__ == "__main__":
         # SEED
         # """
         sv = scale * vd.getSeedVertex(p)
-        print " seed vertex is ", sv
+        print(" seed vertex is ", sv)
         seed_actor = ovdvtk.Sphere(center=(sv.x, sv.y, 0), radius=vertexRadius, color=ovdvtk.pink)
         if n in ren:
             myscreen.addActor(seed_actor)
@@ -175,7 +175,7 @@ if __name__ == "__main__":
         # DELETE-SET
         # """
         delset = vd.getDeleteSet(p)
-        # print " seed vertex is ",sv
+        # print(" seed vertex is ",sv)
         p_actors = []
         if n in ren:
             for pd in delset:
@@ -195,7 +195,7 @@ if __name__ == "__main__":
         # """
         delEdges = vd.getDeleteEdges(p)
         modEdges = vd.getModEdges(p)
-        # print " seed vertex is ",sv
+        # print(" seed vertex is ",sv)
         edge_actors = []
         if n in ren:
             for e in delEdges:
@@ -238,13 +238,13 @@ if __name__ == "__main__":
                 myscreen.removeActor(a)
 
         n = n + 1
-        # print "**********"
+        # print("**********")
 
     t_after = time.time()
     calctime = t_after - t_before
-    print " VD done in ", calctime, " s, ", calctime / Nmax, " s per generator"
+    print(" VD done in ", calctime, " s, ", calctime / Nmax, " s per generator")
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

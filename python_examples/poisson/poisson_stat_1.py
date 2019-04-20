@@ -23,7 +23,7 @@ def writeLargeFrame(myscreen, w2if, lwr, n, zoom=1):
     writer.SetFileName("large_frame.png")
     writer.SetInputConnection(renderlarge.GetOutputPort())
     writer.Write()
-    print "Wrote large frame!"
+    print("Wrote large frame!")
 
 
 def writeFrame(w2if, lwr, n):
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     n = 0
     id_list = []
     for p in plist:
-        # print n," adding ",p
+        # print(n," adding ",p)
         id_list.append(vd.addVertexSite(p))
         n = n + 1
     t_after = time.time()
@@ -109,14 +109,14 @@ if __name__ == "__main__":
     times.append(calctime)
     if Nmax == 0:
         Nmax = 1
-    # print " VD done in ", calctime," s, ", 1e6*calctime/float(Nmax)*(math.log(Nmax)/math.log(2.0))," us per n*log2(n)"
+    # print(" VD done in ", calctime," s, ", 1e6*calctime/float(Nmax)*(math.log(Nmax)/math.log(2.0))," us per n*log2(n)")
     stat = vd.getFaceStats()
     data = []
     for s in stat:
         data.append(s[2])
-        # print s
+        # print(s)
     hist = histogram(data)
-    print hist
+    print(hist)
     times.append(0)
     vod.setVDText2(times)
     vod.setAll()
@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
     # writeFrame(  w2if, lwr, 2 )
     # writeLargeFrame( myscreen, w2if, lwr, 2 , zoom=20)
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

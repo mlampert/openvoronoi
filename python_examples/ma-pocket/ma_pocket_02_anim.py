@@ -48,7 +48,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0.22, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -76,20 +76,20 @@ if __name__ == "__main__":
     pts = [p1, p2, p3, p4, p5]
 
     # t_after = time.time()
-    # print ".done in {0:.3f} s.".format( t_after-t_before )
+    # print(".done in {0:.3f} s.".format( t_after-t_before ))
     times = []
     id_list = []
     m = 0
     t_before = time.time()
     for p in pts:
         id_list.append(vd.addVertexSite(p))
-        # print m," added vertex", seg_id[0]
+        # print(m," added vertex", seg_id[0])
         m += 1
 
     t_after = time.time()
     times.append(t_after - t_before)
 
-    print "all point sites inserted. "
+    print("all point sites inserted. ")
     vd.check()
 
     t_before = time.time()
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         for n in range(len(mic_list)):
             mic = mic_list[n]
             if n == 0:
-                print "hello", mic[0], " r = ", mic[1]
+                print("hello", mic[0], " r = ", mic[1])
                 drawCircle(myscreen, mic[0], mic[1], ovdvtk.red)
             else:
                 drawCircle(myscreen, mic[0], mic[1], ovdvtk.green)
@@ -132,16 +132,16 @@ if __name__ == "__main__":
             w2if.Update()
 
             lwr.SetFileName("frames/%06d.png" % nframe)
-            # print("Frame: %s" % lwr.GetFileName())
+            # print("Frame: %s" % lwr.GetFileName()))
             nframe += 1
             lwr.Write()
 
             time.sleep(0.1)
             myscreen.render()
 
-        print "mic done."
+        print("mic done.")
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
 
     myscreen.render()
     myscreen.iren.Start()

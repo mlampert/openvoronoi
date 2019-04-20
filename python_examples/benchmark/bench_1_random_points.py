@@ -58,18 +58,18 @@ if __name__ == "__main__":
     Nmax_list = []
     for e in exp_list:
         Nmax_list.append(int(math.floor((math.pow(2, e)))))
-    print ovd.version()
-    print "Benchmarking for Nmax in: "
-    print Nmax_list
+    print(ovd.version())
+    print("Benchmarking for Nmax in: ")
+    print(Nmax_list)
 
     if write_csv_output:
         csvWriter = csv.writer(open('results_rand_189.csv', 'wb'), delimiter=',')
 
     for Nmax in Nmax_list:
         t = timeVoronoi(Nmax)
-        print Nmax, " points took %.3f seconds = %.3f us/n*log2(n)" % (
-        t, 1e6 * float(t) / (float(Nmax) * float(math.log10(Nmax) / math.log10(2))))
+        print(Nmax, " points took %.3f seconds = %.3f us/n*log2(n)" % (
+        t, 1e6 * float(t) / (float(Nmax) * float(math.log10(Nmax) / math.log10(2)))))
         if write_csv_output:
             csvWriter.writerow([Nmax, t])
 
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")

@@ -29,7 +29,7 @@ if __name__ == "__main__":
     myscreen.camera.SetFocalPoint(0.0, 0, 0)
 
     vd = ovd.VoronoiDiagram(far, 120)
-    print ovd.version()
+    print(ovd.version())
 
     # for vtk visualization
     vod = ovdvtk.VD(myscreen, vd, float(scale), textscale=0.01, vertexradius=0.003)
@@ -54,20 +54,20 @@ if __name__ == "__main__":
     pts = [p1, p2, p3, p4, p5]  # a list of all points in the input
 
     # t_after = time.time()
-    # print ".done in {0:.3f} s.".format( t_after-t_before )
+    # print(".done in {0:.3f} s.".format( t_after-t_before ))
     times = []
     id_list = []
     m = 0
     t_before = time.time()
     for p in pts:  # add all points before adding line-segments
         id_list.append(vd.addVertexSite(p))
-        # print m," added vertex", seg_id[0]
+        # print(m," added vertex", seg_id[0])
         m = m + 1
 
     t_after = time.time()
     times.append(t_after - t_before)
-    print "all point sites inserted. "
-    print "VD check: ", vd.check()
+    print("all point sites inserted. ")
+    print("VD check: ", vd.check())
 
     t_before = time.time()
     # now add line-segments, by using the integer indexes returned by vd.addVertexSite() above
@@ -92,9 +92,9 @@ if __name__ == "__main__":
     ofs = of.offset(0.123)  # generate offsets at the given distance.
     offset2vtk.drawOffsets(myscreen, ofs)  # draw the generated offsets
     for v in ofs:
-        print v
+        print(v)
     vod.setVDText2(times)
     vod.setAll()
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
     myscreen.render()
     myscreen.iren.Start()

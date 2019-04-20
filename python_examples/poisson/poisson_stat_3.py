@@ -31,7 +31,7 @@ def histogram(L):
 
 def sortedDict(adict):
     keys = adict.keys()
-    keys.sort()
+    keys = sorted(keys)
     l = []
     for key in keys:
         d = []
@@ -54,8 +54,8 @@ def getVoronoiStats(Nmax, seed=1):
 
     t_after = time.time()
     calctime = t_after - t_before
-    print " VD done in ", calctime, " s, ", 1e6 * calctime / (
-            Nmax * (math.log(Nmax) / math.log(2))), " us per n*log2(n())"
+    print(" VD done in ", calctime, " s, ", 1e6 * calctime / (
+            Nmax * (math.log(Nmax) / math.log(2))), " us per n*log2(n())")
     stat = vd.getFaceStats()
     data = []
     for s in stat:
@@ -75,11 +75,11 @@ def writeResults(seed, Nmax, data):
 
 
 if __name__ == "__main__":
-    print ovd.version()
+    print(ovd.version())
     Nmax = 10000
     max_seed = 10
     for s in range(0, max_seed):
         d = getVoronoiStats(Nmax, s)
-        print "seed= ", s, " Nmax=", Nmax
+        print("seed= ", s, " Nmax=", Nmax)
         writeResults(s, Nmax, d)
-    print "PYTHON All DONE."
+    print("PYTHON All DONE.")
