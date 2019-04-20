@@ -281,24 +281,18 @@ IF( ${BUILD_PYTHON_MODULE} MATCHES ON)
   if (NOT APPLE)
     set_target_properties(openvoronoi PROPERTIES VERSION ${MY_VERSION}) 
   endif (NOT APPLE)
-  # this figures out where to install the Python modules
-  execute_process(
-    COMMAND python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"
-    OUTPUT_VARIABLE Python_site_packages
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ) # on Ubuntu 11.10 this outputs: /usr/local/lib/python2.7/dist-packages
 
   # strip away /usr/local/  because that is what CMAKE_INSTALL_PREFIX is set to
   # also, since there is no leading "/", it makes ${Python_site_packages} a relative path.
   # STRING(REGEX REPLACE "/usr/local/(.*)$" "\\1" Python_site_packages "${Python_site_packages}" )
   MESSAGE(STATUS "CMAKE_INSTALL_PREFIX is : " ${CMAKE_INSTALL_PREFIX})
-  MESSAGE(STATUS "Python libraries will be installed to: " ${Python_site_packages})
+  MESSAGE(STATUS "Python libraries will be installed to: " ${PYTHON_ARCH_PACKAGES})
 
   # this installs the python library
   install(
     TARGETS openvoronoi
     LIBRARY 
-    DESTINATION ${Python_site_packages}
+    DESTINATION ${PYTHON_ARCH_PACKAGES}
     )
 
   # this installs the python VTK-visualization helper py-files
@@ -306,7 +300,7 @@ IF( ${BUILD_PYTHON_MODULE} MATCHES ON)
     FILES ${OpenVoronoi_SOURCE_DIR}/py/ovdvtk.py
     ${OpenVoronoi_SOURCE_DIR}/py/ngc_writer.py
     ${OpenVoronoi_SOURCE_DIR}/py/ovdgenerators.py
-    DESTINATION ${Python_site_packages}
+    DESTINATION ${PYTHON_ARCH_PACKAGES}
     PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
     )
 ENDIF() # end Python module
