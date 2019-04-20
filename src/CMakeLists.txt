@@ -230,7 +230,7 @@ if (NOT APPLE)
 endif (NOT APPLE)
 # link against libqd here. 
 # an alternative is to link libqd when an application using openvoronoi is built.
-target_link_libraries(libopenvoronoi ${Boost_LIBRARIES} ${QD_LIBRARY}) 
+target_link_libraries(libopenvoronoi ${Boost_LIBRARIES} ${QD_LIBRARY} ${PYTHON_LIBRARIES}) 
 
 # c++lib for coverage testing
 add_library(
